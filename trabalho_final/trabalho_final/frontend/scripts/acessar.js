@@ -10,7 +10,7 @@ function onSubmit(event) {
     response.json().then((json)=>{
       localStorage.setItem("cliente", JSON.stringify(json));
 
-      window.location.href = `site.html`
+      window.location.href = `home.html`
     })
   });
 }
@@ -19,7 +19,7 @@ function usuarioJaLogado() {
   const cliente = localStorage.getItem("cliente");
 
   if(cliente){
-    window.location.href = `site.html`
+    window.location.href = `home.html`
   }
 }
 
