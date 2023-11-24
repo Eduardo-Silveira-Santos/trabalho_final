@@ -13,7 +13,7 @@ function admin() {
   const cliente = JSON.parse(clienteString);
 
   if(cliente.nome !== 'admin'){
-    window.location.href = `usuarios.html`
+    window.location.href = `usuario.html`
   }
 
   const nav = document.querySelector('nav');

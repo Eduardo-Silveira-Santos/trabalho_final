@@ -73,7 +73,7 @@ function onSubmit(event) {
     response.json().then((json)=>{
       console.log({json});
       localStorage.setItem("cliente", JSON.stringify(json));
-      window.location.href = 'usuarios.html';
+      window.location.href = 'usuario.html';
     });
   });
 }
