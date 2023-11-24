@@ -1,7 +1,6 @@
 function validarCliente() {
   const cliente = localStorage.getItem("cliente");
-
-  if(!cliente){
+  if (!cliente) {
     window.location.href = `acessar.html`
   }
 }
@@ -11,14 +10,11 @@ validarCliente();
 function admin() {
   const clienteString = localStorage.getItem('cliente');
   const cliente = JSON.parse(clienteString);
-
-  if(cliente.nome === 'admin'){
+  if (cliente.nome === 'admin') {
     const nav = document.querySelector('nav');
-
     const adminLink = document.createElement('a');
     adminLink.href = 'cadastrarProduto.html';
     adminLink.innerText = 'Cadastrar Produtos';
-
     nav.appendChild(adminLink)
   }
 }
@@ -43,15 +39,15 @@ function adicionarProduto(produto) {
   buttonAdd.innerText = 'Adicionar ao Carrinho';
   buttonAdd.addEventListener('click', () => {
     const carrinhoString = localStorage.getItem('carrinho');
-    
+
     const carrinho = carrinhoString ? JSON.parse(carrinhoString) : [];
 
 
-    const produtoAchado = carrinho.find((item)=>{
+    const produtoAchado = carrinho.find((item) => {
       return item.produto.codigo_produto === produto.codigo_produto;
     })
 
-    if(produtoAchado) {
+    if (produtoAchado) {
       produtoAchado.quantidade += 1;
     } else {
       carrinho.push({
@@ -74,8 +70,8 @@ function adicionarProduto(produto) {
 function carregarProdutos() {
   fetch(`http://localhost:3000/produtos`, {
     method: 'get',
-  }).then((response) => { 
-    response.json().then((produtos)=>{
+  }).then((response) => {
+    response.json().then((produtos) => {
       produtos.forEach((produto) => {
         adicionarProduto(produto)
       });

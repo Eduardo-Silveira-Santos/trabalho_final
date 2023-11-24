@@ -1,7 +1,6 @@
 function usuarioJaLogado() {
   const cliente = localStorage.getItem("cliente");
-
-  if(cliente){
+  if (cliente) {
     window.location.href = `home.html`
   }
 }

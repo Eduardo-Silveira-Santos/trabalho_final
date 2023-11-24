@@ -1,26 +1,24 @@
 function onSubmit(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const data = new FormData(event.currentTarget);
-  const valores = Object.fromEntries(data);
+    const data = new FormData(event.currentTarget);
+    const valores = Object.fromEntries(data);
 
-  fetch(`http://localhost:3000/login/${valores.usuario}/${valores.senha}`, {
-    method: 'get',
-  }).then((response) => { 
-    response.json().then((json)=>{
-      localStorage.setItem("cliente", JSON.stringify(json));
-
-      window.location.href = `home.html`
-    })
-  });
+    fetch(`http://localhost:3000/login/${valores.usuario}/${valores.senha}`, {
+        method: 'get',
+    }).then((response) => {
+        response.json().then((json) => {
+            localStorage.setItem("cliente", JSON.stringify(json));
+            window.location.href = `home.html`
+        })
+    });
 }
 
 function usuarioJaLogado() {
-  const cliente = localStorage.getItem("cliente");
-
-  if(cliente){
-    window.location.href = `home.html`
-  }
+    const cliente = localStorage.getItem("cliente");
+    if (cliente) {
+        window.location.href = `home.html`
+    }
 }
 
 usuarioJaLogado();

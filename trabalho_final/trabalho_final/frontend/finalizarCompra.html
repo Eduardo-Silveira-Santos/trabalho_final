@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Figures Store</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+    <title>Anime Figures Store</title>
 </head>
 <body>
     <header>
         <img src="imagens/logo.png" alt="Logo da Anime Figures Store">
         <h1>Anime Figures Store</h1>
     </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="usuario.html">Usuário</a>
+        <a href="carrinho.html">Carrinho</a>
+    </nav>
+    <br><br>
     <main>
-        <h1>Acessar</h1>
+        <h1>Informe seus Dados para finalizar a compra!</h1>
         <br>
         <div>
             <form action="" id="acessarForm">
-                <label for="acessarNome"></label>
-                <input type="text" name="usuario" id="acessarNome" placeholder="Nome de Usuário">
-                <br>
-                <label for="acessarSenha"></label>
-                <input type="password" name="senha" id="acessarSenha" placeholder="Senha">
+                <button class="button" type="submit"><a href="acessar.html">Já Tenho Conta</a></button>
                 <br><br>
-                <button class="button" type="submit">Entrar</button>
+                <button class="button" type="submit"><a href="cadastrar.html">Criar Conta</a></button>
             </form>
         </div>
     </main>
@@ -31,5 +34,5 @@
         <p>&copy; 2023 Anime Figures Store. Todos os direitos reservados.</p>
     </footer>
 </body>
-<script src="./scripts/acessar.js"></script>
+<script src="./scripts/index.js"></script>
 </html>

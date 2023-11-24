@@ -1,7 +1,7 @@
 function validarCliente() {
   const cliente = localStorage.getItem("cliente");
 
-  if(!cliente){
+  if (!cliente) {
     window.location.href = `acessar.html`
   }
 }
@@ -12,7 +12,7 @@ function admin() {
   const clienteString = localStorage.getItem('cliente');
   const cliente = JSON.parse(clienteString);
 
-  if(cliente.nome === 'admin'){
+  if (cliente.nome === 'admin') {
     const nav = document.querySelector('nav');
 
     const adminLink = document.createElement('a');
@@ -25,7 +25,7 @@ function admin() {
 
 admin();
 
-function adicionarItemTabela(item){
+function adicionarItemTabela(item) {
   const linha = document.createElement("tr");
   const tdCodigo = document.createElement("td");
   const tdDescricao = document.createElement("td");
@@ -36,22 +36,22 @@ function adicionarItemTabela(item){
   const tdPreco = document.createElement("td");
 
   tdCodigo.innerText = item.produto.codigo_produto;
-  
+
   tdDescricao.innerText = item.produto.descricao;
-  
-  
+
+
   buttonAdd.innerText = '+';
   tdQuantidade.appendChild(buttonAdd);
 
-  buttonAdd.addEventListener('click', ()=>{
+  buttonAdd.addEventListener('click', () => {
     const carrinhoString = localStorage.getItem('carrinho');
     const carrinho = carrinhoString ? JSON.parse(carrinhoString) : [];
 
-    let produtoAchado = carrinho.find((produto)=>{
+    let produtoAchado = carrinho.find((produto) => {
       return produto.produto.codigo_produto === item.produto.codigo_produto;
     })
 
-    if(produtoAchado) {
+    if (produtoAchado) {
       produtoAchado.quantidade += 1;
     } else {
       produtoAchado = {
@@ -64,7 +64,7 @@ function adicionarItemTabela(item){
     quantidade.innerText = produtoAchado.quantidade;
     tdPreco.innerText = `$${produtoAchado.quantidade * produtoAchado.produto.preco}`;
 
-    const total = carrinho.reduce((acc, item)=>{
+    const total = carrinho.reduce((acc, item) => {
       return acc += item.quantidade * item.produto.preco;
     }, 0);
 
@@ -73,34 +73,34 @@ function adicionarItemTabela(item){
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
   })
 
-  buttonRemove.addEventListener('click', ()=>{
+  buttonRemove.addEventListener('click', () => {
     const carrinhoString = localStorage.getItem('carrinho');
     const carrinho = carrinhoString ? JSON.parse(carrinhoString) : [];
 
-    let produtoAchado = carrinho.find((produto)=>{
+    let produtoAchado = carrinho.find((produto) => {
       return produto.produto.codigo_produto === item.produto.codigo_produto;
     })
 
-    if(produtoAchado) {
+    if (produtoAchado) {
       produtoAchado.quantidade -= 1;
 
-      if(produtoAchado.quantidade < 1) {
+      if (produtoAchado.quantidade < 1) {
         document.querySelector('tbody').removeChild(linha);
       } else {
         quantidade.innerText = produtoAchado.quantidade;
         tdPreco.innerText = `$${produtoAchado.quantidade * produtoAchado.produto.preco}`;
       }
-    } else { 
+    } else {
       document.querySelector('tbody').removeChild(linha);
     }
 
-    const total = carrinho.reduce((acc, item)=>{
+    const total = carrinho.reduce((acc, item) => {
       return acc += item.quantidade * item.produto.preco;
     }, 0);
 
     document.getElementById('valorFinal').innerText = `$${total}`;
 
-    localStorage.setItem('carrinho', JSON.stringify(carrinho.filter(item=>item.quantidade>0)));
+    localStorage.setItem('carrinho', JSON.stringify(carrinho.filter(item => item.quantidade > 0)));
   })
 
   quantidade.innerText = item.quantidade;
@@ -109,7 +109,7 @@ function adicionarItemTabela(item){
 
   buttonRemove.innerText = '-';
   tdQuantidade.appendChild(buttonRemove);
-  
+
   tdPreco.innerText = `$${item.produto.preco * item.quantidade}`;
 
   linha.appendChild(tdCodigo);
@@ -128,7 +128,7 @@ function preencherTabela() {
 
   carrinho.forEach((item) => {
     adicionarItemTabela(item);
-    
+
     valorFinal += item.produto.preco * item.quantidade;
   });
 
@@ -140,7 +140,7 @@ function onClickFinalizar() {
   const clienteString = localStorage.getItem('cliente');
   const cliente = JSON.parse(clienteString);
 
-  if(cliente.nome === 'admin') {
+  if (cliente.nome === 'admin') {
     window.alert('Admin não pode fazer compras');
     return;
   }
@@ -148,11 +148,11 @@ function onClickFinalizar() {
   const carrinhoString = localStorage.getItem('carrinho');
   const carrinho = carrinhoString ? JSON.parse(carrinhoString) : [];
 
-  if(carrinho.length < 1) {
+  if (carrinho.length < 1) {
     return;
   }
 
-  const itensPedido = carrinho.map((item, index)=>{
+  const itensPedido = carrinho.map((item, index) => {
     return {
       sequencial: index,
       codigo_produto: item.produto.codigo_produto,
@@ -168,10 +168,10 @@ function onClickFinalizar() {
       'Content-Type': 'application/json'
     }
   }).then((response) => {
-    if(response.status >= 200 && response.status < 400){
+    if (response.status >= 200 && response.status < 400) {
       window.location.href = 'finalizar.html';
       localStorage.removeItem('carrinho');
-    } 
+    }
   });
 }
 
